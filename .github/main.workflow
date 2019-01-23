@@ -1,6 +1,9 @@
 workflow "Deploy on push to master" {
   on = "push"
-  resolves = ["new-action"]
+  resolves = [
+    "filter",
+    "mortar",
+  ]
 }
 
 action "filter" {
@@ -10,6 +13,7 @@ action "filter" {
 
 action "mortar" {
   uses = "docker://quay.io/kontena/mortar:0.3.1"
-  needs = ["filter"]
   runs = "mortar deploy manifests/ my-app"
+  needs = ["filter"]
+  secrets = ["KUBE_SERVER", "KUBE_TOKEN", "KUBE_CA"]
 }
