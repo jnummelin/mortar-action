@@ -1,15 +1,15 @@
 workflow "Deploy on push to master" {
   on = "push"
-  resolves = ["docker"]
+  resolves = ["filter"]
 }
 
-action "Filters for GitHub Actions" {
+action "filter" {
   uses = "actions/bin/filter@707718ee26483624de00bd146e073d915139a3d8"
   args = "branch master"
 }
 
-action "Mortar deploy" {
+action "mortar" {
   uses = "docker://quay.io/kontena/mortar:0.3.1"
-  needs = ["Filters for GitHub Actions"]
+  needs = ["filter"]
   runs = "mortar deploy manifests/ my-app"
 }
