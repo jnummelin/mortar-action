@@ -1,0 +1,4 @@
+variables:
+  namespace: hello-world
+  replicas: 3
+  host: hello-world.nummel.in
