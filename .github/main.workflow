@@ -13,7 +13,7 @@ action "filter" {
 
 action "mortar" {
   uses = "docker://quay.io/kontena/mortar:0.3.1"
-  runs = "mortar deploy manifests/ my-app"
+  runs = "mortar fire manifests/ my-app"
   needs = ["filter"]
   secrets = ["KUBE_SERVER", "KUBE_TOKEN", "KUBE_CA"]
 }
