@@ -1,6 +1,6 @@
 workflow "Deploy on push to master" {
   on = "push"
-  resolves = ["filter"]
+  resolves = ["new-action"]
 }
 
 action "filter" {
